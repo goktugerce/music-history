@@ -48,16 +48,23 @@ def get_top_artists():
 
     artists = []
     play_counts = []
-    tags = []
+    tag1 = []
+    tag2 = []
+    tag3 = []
 
     for artist in response[method]["artist"]:
         artists.append(artist["name"])
         play_counts.append(artist["playcount"])
-        tags.append(tag_scraper.get_artist_tags(artist["mbid"]))
+        tags = tag_scraper.get_artist_tags(artist["mbid"])
+        if len(tags) == 0:
+            continue
+        tag1.append(tags[0])
+        tag2.append(tags[1])
+        tag3.append(tags[2])
         time.sleep(pause_duration)
 
-    data_set = list(zip(artists, play_counts, tags))
-    df = pd.DataFrame(data=data_set, columns=["Artist", "Play Count", "Tags"])
+    data_set = list(zip(artists, play_counts, tag1, tag2, tag3))
+    df = pd.DataFrame(data=data_set, columns=["Artist", "Play Count", "Tag1", "Tag2", "Tag3"])
     df.to_csv("data/top_artists.csv", index=None, encoding="utf-8")
 
 
@@ -97,7 +104,9 @@ def get_top_tracks():
     tracks = []
     artists = []
     play_counts = []
-    tags = []
+    tag1 = []
+    tag2 = []
+    tag3 = []
 
     for track in response[method]["track"]:
         track_name = track["name"]
@@ -106,9 +115,25 @@ def get_top_tracks():
         tracks.append(track_name)
         artists.append(artist)
         play_counts.append(track["playcount"])
-        tags.append(tag_scraper.get_track_tags(artist, track_name))
+        tags = tag_scraper.get_track_tags(artist, track_name)
+
+        if tags is None:
+            continue
+        elif len(tags) == 1:
+            tag1.append(tags[0])
+        elif len(tags) == 2:
+            tag1.append(tags[0])
+            tag2.append(tags[1])
+        elif len(tags) == 3:
+            tag1.append(tags[0])
+            tag2.append(tags[1])
+            tag3.append(tags[2])
+
         time.sleep(pause_duration)
 
-    data_set = list(zip(tracks, artists, play_counts, tags))
-    df = pd.DataFrame(data=data_set, columns=["Track", "Artist", "Play Count", "Tags"])
+    data_set = list(zip(tracks, artists, play_counts, tag1, tag2, tag3))
+    df = pd.DataFrame(data=data_set, columns=["Track", "Artist", "Play Count", "Tag1", "Tag2", "Tag3"])
     df.to_csv("data/top_tracks.csv", index=None, encoding="utf-8")
+
+
+get_top_tracks()
