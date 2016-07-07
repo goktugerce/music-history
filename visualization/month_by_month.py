@@ -31,6 +31,9 @@ play_counts = np.array(month_counts.values)
 top_indices = play_counts.argsort()[-3:][::-1]
 top_values = [play_counts[x] for x in top_indices]
 
+"""
+Add annotations to three months with most songs played
+"""
 for i in range(3):
     if i == 1:
         coeff = 1.1
