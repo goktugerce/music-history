@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Month-by-month</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Play Count'],
+            ['2014-01',444],
+['2014-02',219],
+['2014-03',482],
+['2014-04',576],
+['2014-05',656],
+['2014-06',395],
+['2014-07',327],
+['2014-08',674],
+['2014-09',346],
+['2014-10',619],
+['2014-11',394],
+['2014-12',536],
+['2015-01',500],
+['2015-02',190],
+['2015-03',489],
+['2015-04',463],
+['2015-05',564],
+['2015-06',288],
+['2015-07',872],
+['2015-08',979],
+['2015-09',372],
+['2015-10',314],
+['2015-11',353],
+['2015-12',640],
+['2016-01',598],
+['2016-02',296],
+['2016-03',818],
+['2016-04',583],
+['2016-05',1131],
+['2016-06',410],
+['2016-07',1074]
+        ]);
+        var options = {
+            titlePosition: 'none',
+            colors: ['#6A2C70'],
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Months"
+            },
+            vAxis: {
+                title: "Number of Plays",
+                gridlines: {color: '#ccc', count: 6}
+            }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Month-by-month music listening data</h3>
+    <div id="chart_div" style="width: 100%; display:inline-block; height: 600px;"></div>
+</div>
+</body>
+</html>

@@ -4,13 +4,14 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 import random
+from html_template import *
 
 import time_columns_adder
 
 reload(sys)
 sys.setdefaultencoding("utf8")
 
-df = pd.read_csv("../data/all_scrobbles.csv", encoding="utf-8")
+df = pd.read_csv("../data/all_scrobbles_last.csv", encoding="utf-8")
 scrobbles = df.drop("Date", axis=1)
 scrobbles = time_columns_adder.add_time_columns(df, scrobbles)
 
@@ -43,5 +44,23 @@ for i in range(3):
                 arrowprops=dict(facecolor="#B83B5E", shrink=0.1, width=2, headlength=10), color="#B83B5E"
                 )
 
-plt.savefig("../images/month_by_month.png", dpi=96, bbox_inches="tight")
-plt.show()
+# plt.savefig("../images/month_by_month.png", dpi=96, bbox_inches="tight")
+# plt.show()
+#
+
+html_data = ""
+for index, row in month_counts.iteritems():
+    string = "['"
+    string += index
+    string += "',"
+    string += str(row)
+    string += "]"
+    html_data += string + ",\n"
+
+html_data = html_data[:-2]
+
+html = html_line_chart.format("Month-by-month", "Month", html_data, "#6A2C70", "Months", "Month-by-month music listening data")
+
+f = open("month_chart.html", "w")
+f.write(html)
+f.close()

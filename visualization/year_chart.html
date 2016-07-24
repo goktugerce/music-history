@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Year-by-year</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Play Count'],
+            ['2014',5668],
+['2015',6024],
+['2016',4910]
+        ]);
+        var options = {
+            titlePosition: 'none',
+            colors: ['#48466D'],
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Years"
+            },
+            vAxis: {
+                title: "Number of Plays",
+                gridlines: {color: '#ccc', count: 6}
+            }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Year-by-year music listening data</h3>
+    <div id="chart_div" style="width: 100%; display:inline-block; height: 600px;"></div>
+</div>
+</body>
+</html>

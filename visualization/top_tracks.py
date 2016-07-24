@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
+from html_template import *
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -41,4 +42,39 @@ def plot_genres():
     plt.show()
 
 
-plot_genres()
+def make_html(row):
+    string = "['"
+    string += row["Track"].replace("\'", "\\'")
+    string += "',"
+    string += str(row["Play Count"])
+    string += "]"
+    return string
+
+
+top_tracks = top_tracks.reset_index()
+top_tracks.columns = ["Track", "Play Count"]
+top_tracks["html"] = top_tracks.apply(make_html, axis=1)
+
+html_track_data = ""
+for index, row in top_tracks["html"].sort_index(ascending=False).iteritems():
+    html_track_data += row.replace("\n", " - ") + ",\n"
+
+html_album_data = html_track_data[:-2]
+
+html_genre_data = ""
+for index, row in top_track_genres.iteritems():
+    string = "['"
+    string += index
+    string += "',"
+    string += str(row)
+    string += "]"
+    html_genre_data += string + ",\n"
+
+html_genre_data = html_genre_data[:-2]
+
+html = html_top_albums_and_tracks.format("Tracks", "'Track'", html_album_data, "#6A2C70", "Tracks",
+                                         html_genre_data, "Tracks")
+
+f = open("top_tracks.html", "w")
+f.write(html)
+f.close()

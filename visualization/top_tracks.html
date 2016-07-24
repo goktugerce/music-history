@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Top Tracks</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawPieChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Track', 'Play Count'],
+            ['Kasabian - Days Are Forgotten',21],
+['Iron Maiden - The Great Unknown',19],
+['Iron Maiden - Death or Glory',18],
+['Kasabian - Goodbye Kiss',18],
+['Kasabian - Let\'s Roll Just Like We Used To',18],
+['Kasabian - Man of Simple Pleasures',18],
+['Iron Maiden - The Red and the Black',18],
+['Iron Maiden - When the River Runs Deep',18],
+['Kasabian - Acid Turkish Bath (Shelter from the Storm)',17],
+['Arctic Monkeys - Do I Wanna Know?',17],
+['Iron Maiden - If Eternity Should Fail',17],
+['Editors - Sugar',17],
+['Iron Maiden - Shadows of the Valley',16],
+['Iron Maiden - Speed of Light',16],
+['Iron Maiden - Tears Of A Clown',16],
+['Iron Maiden - The Book of Souls',16],
+['Muse - Uprising',16],
+['Madrugada - Vocal - 2010 Digital Remaster;',16],
+['Iron Maiden - Empire of the Clouds',15],
+['Kasabian - La Fee Verte',15]
+        ]);
+        var options = {
+            titlePosition: 'none',
+            colors: ['#6A2C70'],
+            bar: {groupWidth: '85%'},
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Tracks"
+            },
+            vAxis: {
+                title: "Number of Plays",
+                format: '0'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function drawPieChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Genre', 'Play Counts'],
+          ['indie rock',4],
+['indie',3],
+['heavy metal',3],
+['british',2],
+['metal',2],
+['NWOBHM',2],
+['alternative',1],
+['rock',1],
+['Power metal',1],
+['alternative rock',1]
+        ]);
+
+        var options = {
+          titlePosition: 'none'
+        };
+
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        piechart.draw(data, options);
+      }
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Top Tracks</h3>
+    <div id="chart_div" style="height:600px; display:inline-block; width: 70%"></div>
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana; margin-top:50px">Top Genres</h3>
+    <div id="piechart" style="display:inline-block; width:80%; height:500px;"></div>
+</div>
+</body>
+</html>

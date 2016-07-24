@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Top Artists</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawPieChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Artist', 'Play Count'],
+            ['Iron Maiden',485],
+['Kasabian',336],
+['Pink Floyd',246],
+['Madrugada',235],
+['Arctic Monkeys',234],
+['The Last Shadow Puppets',225],
+['Muse',175],
+['Queen',152],
+['Hozier',140],
+['The Black Keys',136],
+['Pulp',125],
+['Duman',122],
+['Jeff Buckley',121],
+['Camel',115],
+['Metallica',115],
+['Travis',114],
+['Tarkan',113],
+['The National',110],
+['Frank Sinatra',109],
+['Black Rebel Motorcycle Club',95],
+['Editors',95],
+['Pearl Jam',93],
+['Dream Theater',89],
+['Cream',86],
+['Justin Timberlake',86]
+        ]);
+        var options = {
+            title: "Top Artists Listened",
+            titlePosition: 'none',
+            colors: ['#EA5455'],
+            bar: {groupWidth: '85%'},
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Artists"
+            },
+            vAxis: {
+                title: "Number of Plays"
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_plain'));
+        chart.draw(data, options);
+    }
+
+    function drawPieChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Genre', 'Play Counts'],
+          ['rock',10],
+['indie',9],
+['indie rock',6],
+['classic rock',4],
+['british',4],
+['alternative rock',3],
+['Progressive rock',3],
+['metal',3],
+['britpop',2],
+['blues rock',2]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          titlePosition: 'none'
+        };
+
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        piechart.draw(data, options);
+      }
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Top Artists</h3>
+    <div id="columnchart_plain" style="width: 100%; display:inline-block; height: 600px;"></div>
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana; margin-top:50px">Top Genres</h3>
+    <div id="piechart" style="display:inline-block; width:80%; height:500px;"></div>
+</div>
+</body>
+</html>

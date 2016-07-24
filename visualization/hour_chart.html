@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Hour of the day</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Hour', 'Play Count'],
+            ['00:00',1348],
+['01:00',824],
+['02:00',267],
+['03:00',72],
+['04:00',20],
+['05:00',4],
+['06:00',13],
+['07:00',28],
+['08:00',130],
+['09:00',533],
+['10:00',874],
+['11:00',988],
+['12:00',843],
+['13:00',947],
+['14:00',1173],
+['15:00',1089],
+['16:00',1041],
+['17:00',867],
+['18:00',605],
+['19:00',549],
+['20:00',909],
+['21:00',1172],
+['22:00',1164],
+['23:00',1142]
+        ]);
+        var options = {
+            titlePosition: 'none',
+            colors: ['#00B8A9'],
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Hours"
+            },
+            vAxis: {
+                title: "Number of Plays",
+                gridlines: {color: '#ccc', count: 6}
+            }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Music listening data by hour of the day</h3>
+    <div id="chart_div" style="width: 100%; display:inline-block; height: 600px;"></div>
+</div>
+</body>
+</html>

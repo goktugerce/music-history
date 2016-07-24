@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
+from html_template import *
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -40,3 +41,42 @@ def plot_genres():
     plt.savefig("../images/top_album_genres.png", dpi=96, bbox_inches="tight")
     plt.axis("equal")
     plt.show()
+
+
+def make_html(row):
+    string = "['"
+    string += row["Album"].replace("\'", "\\'")
+    string += "',"
+    string += str(row["Play Count"])
+    string += "]"
+    return string
+
+
+top_albums = top_albums.reset_index()
+top_albums.columns = ["Album", "Play Count"]
+
+top_albums["html"] = top_albums.apply(make_html, axis=1)
+
+html_album_data = ""
+for index, row in top_albums["html"].sort_index(ascending=False).iteritems():
+    html_album_data += row.replace("\n", " - ") + ",\n"
+
+html_album_data = html_album_data[:-2]
+
+html_genre_data = ""
+for index, row in top_album_genres.iteritems():
+    string = "['"
+    string += index
+    string += "',"
+    string += str(row)
+    string += "]"
+    html_genre_data += string + ",\n"
+
+html_genre_data = html_genre_data[:-2]
+
+html = html_top_albums_and_tracks.format("Albums", "'Album'", html_album_data, "#3490DE", "Albums",
+                                         html_genre_data, "Albums")
+
+f = open("top_albums.html", "w")
+f.write(html)
+f.close()

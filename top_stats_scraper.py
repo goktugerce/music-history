@@ -136,4 +136,5 @@ def get_top_tracks():
     df.to_csv("data/top_tracks.csv", index=None, encoding="utf-8")
 
 
+get_top_albums()
 get_top_tracks()

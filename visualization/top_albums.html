@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Top Albums</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawPieChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Album', 'Play Count'],
+            ['Iron Maiden - The Book of Souls',184],
+['Kasabian - Velociraptor!',164],
+['Madrugada - The Best Of Madrugada',150],
+['The Last Shadow Puppets - The Age of the Understatement',146],
+['Pink Floyd - The Endless River',110],
+['Pulp - Different Class',86],
+['The Last Shadow Puppets - Everything You’ve Come To Expect',79],
+['Arctic Monkeys - AM',78],
+['Hozier - Hozier',76],
+['Frank Sinatra - Ultimate Sinatra',73],
+['Muse - The Resistance',65],
+['Büyük Ev Ablukada - Full Faça',63],
+['Toygar Işıklı - Ezel (Original TV Series Soundtrack)',62],
+['Hozier - Hozier (Special Edition)',62],
+['The Black Keys - Brothers',60],
+['Arctic Monkeys - Favourite Worst Nightmare',59],
+['Editors - The Weight of Your Love',59],
+['AC/DC - Live at River Plate',56],
+['Queen - Hungarian Rhapsody (Live In Budapest / 1986)',56],
+['Duman - canli',55]
+        ]);
+        var options = {
+            titlePosition: 'none',
+            colors: ['#3490DE'],
+            bar: {groupWidth: '85%'},
+            legend: {position: 'none'},
+            hAxis: {
+                title: "Albums"
+            },
+            vAxis: {
+                title: "Number of Plays",
+                format: '0'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function drawPieChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Genre', 'Play Counts'],
+          ['indie rock',5],
+['Progressive rock',2],
+['pop',2],
+['alternative rock',2],
+['folk',1],
+['trip-hop',1],
+['acoustic',1],
+['rock',1],
+['hard rock',1],
+['norwegian',1]
+        ]);
+
+        var options = {
+          titlePosition: 'none'
+        };
+
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        piechart.draw(data, options);
+      }
+</script>
+
+<div class="container" style="text-align:center;">
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana">Top Albums</h3>
+    <div id="chart_div" style="height:600px; display:inline-block; width: 70%"></div>
+    <h3 style="margin:0 auto; width:50%; text-align:center; font-family:Verdana; margin-top:50px">Top Genres</h3>
+    <div id="piechart" style="display:inline-block; width:80%; height:500px;"></div>
+</div>
+</body>
+</html>

@@ -34,6 +34,7 @@ def find_total_pages(url):
 
     response = request.json()
     total_pages = int(response["recenttracks"]["@attr"]["totalPages"])
+    print(total_pages)
     return total_pages
 
 
@@ -62,8 +63,7 @@ def get_all_scrobbles(method="recenttracks", username=user, key=api_key, limit=l
     total_pages = find_total_pages(request_url)
 
     for page in range(1, total_pages + 1):
-        if page % 5 == 0:
-            print("Page {} is done".format(page))
+        print("Page {} is done".format(page))
         time.sleep(pause_duration)
         request_url = url.format(method, username, key, limit, extended, page)
         responses.append(requests.get(request_url))
@@ -85,7 +85,7 @@ def get_all_scrobbles(method="recenttracks", username=user, key=api_key, limit=l
     df = pd.DataFrame(data=data_set, columns=["Artist", "Artist mbid", "Album", "Album mbid", "Track", "Track mbid"])
     df["Date"] = timestamps
     df["Date"] = pd.to_datetime(df["Date"].astype(int), unit="s")
-    df.to_csv("data/all_scrobbles.csv", index=None, encoding="utf-8")
+    df.to_csv("data/all_scrobbles_last.csv", index=None, encoding="utf-8")
 
 
 get_all_scrobbles()

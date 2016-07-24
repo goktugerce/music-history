@@ -1,4 +1,3 @@
-import pandas as pd
 import pytz
 
 
@@ -26,5 +25,14 @@ def get_min(x):
     return convert_timezone(x).minute
 
 
+def get_sec(x):
+    return convert_timezone(x).second
+
+
 def get_day_of_the_week(x):
     return convert_timezone(x).weekday()
+
+
+def get_exact_date(x):
+    converted = convert_timezone(x)
+    return "{:02}-{:02}-{}".format(converted.day, converted.month, converted.year)

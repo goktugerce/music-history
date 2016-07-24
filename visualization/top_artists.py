@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
+from html_template import *
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -29,7 +30,7 @@ def plot_genres():
     explode = (0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     sns.set_palette(flatui)
 
-    ax = genres.plot(kind="pie", figsize=[8, 8], shadow=True, startangle=250,  explode=explode[:len(genres.index)])
+    ax = genres.plot(kind="pie", figsize=[8, 8], shadow=True, startangle=250, explode=explode[:len(genres.index)])
     ax.set_title("Top Genres", y=1.03)
     ax.set_xlabel("")
     ax.set_ylabel("")
@@ -37,3 +38,39 @@ def plot_genres():
     plt.savefig("../images/top_artist_genres.png", dpi=96, bbox_inches="tight")
     plt.axis("equal")
     plt.show()
+
+
+def make_html(row):
+    string = "['"
+    string += row["Artist"]
+    string += "',"
+    string += str(row["Play Count"])
+    string += "]"
+    return string
+
+
+top_artists = top_artists.reset_index()
+top_artists["html"] = top_artists.apply(make_html, axis=1)
+
+html_artist_data = ""
+for index, row in top_artists["html"].iteritems():
+    html_artist_data += row + ",\n"
+
+html_artist_data = html_artist_data[:-2]
+
+html_genre_data = ""
+for index, row in genres.iteritems():
+    string = "['"
+    string += index
+    string += "',"
+    string += str(row)
+    string += "]"
+    html_genre_data += string + ",\n"
+
+html_genre_data = html_genre_data[:-2]
+
+html = html_top_artists.format(html_artist_data, html_genre_data)
+
+f = open("top_artists.html", "w")
+f.write(html)
+f.close()
